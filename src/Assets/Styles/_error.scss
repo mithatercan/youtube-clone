@@ -1,0 +1,14 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+
+  &__btn {
+    color: red;
+  }
+  * {
+    margin: 0.6em 0;
+  }
+}

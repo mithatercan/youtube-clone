@@ -1,0 +1,35 @@
+.sidebar {
+  position: fixed;
+  top: 10vh;
+  width: 15em;
+  background-color: #f6f6f6;
+  color: black;
+  height: 100vh;
+  overflow-y: scroll;
+  ul {
+    margin-top: 1.5em;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    padding-bottom: 2em;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1em 2.5em;
+
+    &:hover {
+      background-color: #e6e6e6;
+      .sidebar__icon {
+        color: #6e6e6e;
+      }
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 20px;
+  }
+}
