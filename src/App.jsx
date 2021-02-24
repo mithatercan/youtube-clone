@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Routers from "./Routers";
-import Layout from "./Components/Layout/Layout";
 import { BrowserRouter as Router, Redirect } from "react-router-dom";
-import Home from "./Pages/Home";
+
 function App() {
   const [fireRedirect, setFireRedirect] = useState(false);
   const [searchValue, setSearchValue] = useState("most popular videos");
@@ -12,9 +11,12 @@ function App() {
   const [nextPage, setNextPage] = useState("");
   const [prevPage, setPrevPage] = useState("");
   const [pageToken, setPageToken] = useState("");
+  const [country, setCountry] = useState("");
+
   const searchValueWithPlus = searchValue.split(" ").join("+");
   const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
   const searchAPI = `https://www.googleapis.com/youtube/v3/search?pageToken=${pageToken}&part=snippet&maxResults=50&q=${searchValueWithPlus}&type=video&key=${API_KEY}`;
+  const trendingAPI = `https://www.googleapis.com/youtube/v3/videos?chart=mostPopular&regionCode=${country}&maxResults=50&key=${API_KEY}`;
 
   // !!SEARCH VIDEOS HERE !!
   function search(e, inputValue) {
@@ -24,8 +26,9 @@ function App() {
     setFireRedirect(true);
   }
 
+  // !!SEARCH DATA
   useEffect(() => {
-    const fetchSearch = async () => {
+    const fetchSearchData = async () => {
       const response = await fetch(searchAPI);
       const responseData = await response.json();
       console.log(responseData.items);
@@ -35,8 +38,35 @@ function App() {
       setFireRedirect(false);
     };
 
-    fetchSearch();
+    fetchSearchData();
+
+    return () => {
+      console.log("performing cleanup");
+    };
   }, [searchValue, pageToken]);
+
+  // !!TRENDING DATA
+
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      const fetchSearchData = async () => {
+        const response = await fetch(trendingAPI);
+        const responseData = await response.json();
+        console.log(responseData.items);
+        setTrendingData(responseData.items);
+      };
+
+      fetchSearchData();
+    }
+
+    return () => {
+      console.log("performing cleanup");
+    };
+  }, [country]);
 
   if (fireRedirect === true) {
     return (
@@ -68,8 +98,14 @@ function App() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   };
+
+  const selectCountry = (select) => {
+    setCountry(select);
+  };
+
   return (
     <Routers
+      trendingData={trendingData}
       userInfo={() => openInfoModal()}
       finalClear={() => clear()}
       finalSearch={(e, inputValue) => search(e, inputValue)}
@@ -77,6 +113,7 @@ function App() {
       isDisabled={prevPage == undefined ? true : false}
       prevPageCall={() => prevPageCall()}
       nextPageCall={() => nextPageCall()}
+      selectCountry={(select) => selectCountry(select)}
     />
   );
 }

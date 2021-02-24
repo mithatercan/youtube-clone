@@ -1,32 +1,43 @@
 import React, { useEffect, useState } from "react";
-import uuid from "react-uuid";
-import VideoBox from "../Components/Video/VideoBox";
-import StyledLinkVideo from "../Components/Buttons/StyledLinkVideo";
-function Home({ getVideo }) {
-  const [state, setState] = useState([]);
+import ReactFlagsSelect from "react-flags-select";
+
+function Trending({ trendingData, selectCountry }) {
+  const [country, setCountry] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("api.mocki.io/v1/17652818");
-      const responseData = await response.json();
-      console.log(responseData.items);
-      setState(responseData.items);
-    };
+    console.log(country);
+  }, [country]);
 
-    fetchData();
-  }, []);
+  return (
+    <div>
+      <ReactFlagsSelect
+        className="countries"
+        selected={country}
+        onSelect={(select) => {
+          selectCountry(select);
+          setCountry(select);
+        }}
+        placeholder="Select Country"
+        fullWidth={false}
+      />
 
-  return state.map((item) => (
-    <StyledLinkVideo
-      to={{
-        pathname: `/watch/q=`,
-        search: `${item.id.videoId}`,
-        key: `${item.id.videoId}`,
-      }}
-    >
-      <VideoBox onClick={(e) => getVideo(e)} key={uuid()} item={item} />
-    </StyledLinkVideo>
-  ));
+      <div className="trending__container">
+        {!trendingData ? (
+          <h1>Choose a country to see trendings</h1>
+        ) : (
+          trendingData.map((item) => (
+            <iframe
+              width="853"
+              height="480"
+              src={"https://www.youtube.com/embed/" + item.id}
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          ))
+        )}
+      </div>
+    </div>
+  );
 }
 
-export default Home;
+export default Trending;

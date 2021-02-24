@@ -22,6 +22,7 @@ function Routers({
   nextPageCall,
   prevPageCall,
   isDisabled,
+  selectCountry,
 }) {
   return (
     <Router>
@@ -43,7 +44,10 @@ function Routers({
             <Route exact path="/watch/*" component={Watch} />
             <Route exact path="/category" component={Category} />
             <Route exact path="/trending">
-              <Trending />
+              <Trending
+                trendingData={trendingData}
+                selectCountry={(select) => selectCountry(select)}
+              />
             </Route>
           </Layout>
         </Route>

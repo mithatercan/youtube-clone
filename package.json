@@ -10,6 +10,7 @@
     "firebase": "^8.2.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-flags-select": "^2.1.2",
     "react-icons": "^4.1.0",
     "react-indiana-drag-scroll": "^1.8.0",
     "react-router-dom": "^5.2.0",
