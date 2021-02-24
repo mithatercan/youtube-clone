@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ReactFlagsSelect from "react-flags-select";
+import VideoBoxTrending from "../Components/Video/VideoBoxTrending";
+import StyledLinkVideo from "../Components/Buttons/StyledLinkVideo";
 
-function Trending({ trendingData, selectCountry }) {
+import uuid from "react-uuid";
+
+function Trending({ trendingData, selectCountry, getVideo }) {
   const [country, setCountry] = useState("");
 
   useEffect(() => {
@@ -12,6 +16,7 @@ function Trending({ trendingData, selectCountry }) {
     <div>
       <ReactFlagsSelect
         className="countries"
+        countries={["TR", "AZ", "GE", "US", "DE"]}
         selected={country}
         onSelect={(select) => {
           selectCountry(select);
@@ -19,20 +24,27 @@ function Trending({ trendingData, selectCountry }) {
         }}
         placeholder="Select Country"
         fullWidth={false}
+        searchable={true}
       />
 
       <div className="trending__container">
-        {!trendingData ? (
+        {!trendingData || trendingData === undefined ? (
           <h1>Choose a country to see trendings</h1>
         ) : (
           trendingData.map((item) => (
-            <iframe
-              width="853"
-              height="480"
-              src={"https://www.youtube.com/embed/" + item.id}
-              frameborder="0"
-              allowfullscreen
-            ></iframe>
+            <StyledLinkVideo
+              to={{
+                pathname: `/watch/q=`,
+                search: `${item.id}`,
+                key: `${item.id}`,
+              }}
+            >
+              <VideoBoxTrending
+                onClick={(e) => getVideo(e)}
+                key={uuid()}
+                item={item}
+              />
+            </StyledLinkVideo>
           ))
         )}
       </div>

@@ -11,12 +11,14 @@ function App() {
   const [nextPage, setNextPage] = useState("");
   const [prevPage, setPrevPage] = useState("");
   const [pageToken, setPageToken] = useState("");
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("US");
+  const [idData, setIdData] = useState([]);
 
   const searchValueWithPlus = searchValue.split(" ").join("+");
   const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
   const searchAPI = `https://www.googleapis.com/youtube/v3/search?pageToken=${pageToken}&part=snippet&maxResults=50&q=${searchValueWithPlus}&type=video&key=${API_KEY}`;
   const trendingAPI = `https://www.googleapis.com/youtube/v3/videos?chart=mostPopular&regionCode=${country}&maxResults=50&key=${API_KEY}`;
+  const multipleTrendingAPI = `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&part=snippet&id=${idData.join()}`;
 
   // !!SEARCH VIDEOS HERE !!
   function search(e, inputValue) {
@@ -39,13 +41,25 @@ function App() {
     };
 
     fetchSearchData();
-
-    return () => {
-      console.log("performing cleanup");
-    };
   }, [searchValue, pageToken]);
 
   // !!TRENDING DATA
+
+  useEffect(() => {
+    const trendingArr = [];
+    const fetchSearchData = async () => {
+      const response = await fetch(trendingAPI);
+      const responseData = await response.json();
+      console.log(responseData.items);
+      responseData.items.map((item) => {
+        trendingArr.push(item.id);
+      });
+      setIdData(trendingArr);
+      console.log("trending id arr " + trendingArr);
+    };
+
+    fetchSearchData();
+  }, [country]);
 
   const isInitialMount = useRef(true);
 
@@ -54,7 +68,7 @@ function App() {
       isInitialMount.current = false;
     } else {
       const fetchSearchData = async () => {
-        const response = await fetch(trendingAPI);
+        const response = await fetch(multipleTrendingAPI);
         const responseData = await response.json();
         console.log(responseData.items);
         setTrendingData(responseData.items);
@@ -62,11 +76,7 @@ function App() {
 
       fetchSearchData();
     }
-
-    return () => {
-      console.log("performing cleanup");
-    };
-  }, [country]);
+  }, [idData, country]);
 
   if (fireRedirect === true) {
     return (
@@ -81,6 +91,7 @@ function App() {
   const clear = () => {
     setSearchValue("most popular videos");
   };
+
   //  !! OPEN INFO MODAL!!
   const openInfoModal = () => {
     alert("hey");
