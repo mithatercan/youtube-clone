@@ -19,6 +19,9 @@ function Routers({
   searchData,
   categoryData,
   trendingData,
+  nextPageCall,
+  prevPageCall,
+  isDisabled,
 }) {
   return (
     <Router>
@@ -30,7 +33,12 @@ function Routers({
             openInfo={() => userInfo()}
           >
             <Route exact path="/">
-              <Home data={searchData} />
+              <Home
+                data={searchData}
+                nextPageCall={() => nextPageCall()}
+                prevPageCall={() => prevPageCall()}
+                isDisabled={isDisabled}
+              />
             </Route>
             <Route exact path="/watch/*" component={Watch} />
             <Route exact path="/category" component={Category} />
