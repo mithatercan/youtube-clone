@@ -5,7 +5,17 @@ import Main from "../Main/Main";
 import Sidebar from "../Sidebar/Sidebar";
 import uuid from "react-uuid";
 import ScrollContainer from "react-indiana-drag-scroll";
-function Layout({ children, setVideos, clearData, openInfo }) {
+import PrevBtn from "../Buttons/PrevBtn";
+import NextBtn from "../Buttons/NextBtn";
+function Layout({
+  children,
+  setVideos,
+  clearData,
+  openInfo,
+  nextPageCall,
+  prevPageCall,
+  checkDisable,
+}) {
   const widthOfScreen = window.innerWidth;
   const [isOpened, setIsOpened] = useState(true);
   const [data, setData] = useState([]);
@@ -62,7 +72,6 @@ function Layout({ children, setVideos, clearData, openInfo }) {
               />
             ))}
           </ScrollContainer>
-
           <div className="main__videos">{children}</div>
         </Main>
       </div>
