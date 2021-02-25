@@ -221,12 +221,12 @@ li {
   color: #000;
   padding: 7px 15px;
   border-radius: 15px;
-  margin: 0 35px;
+  margin: 0 5px 0 35px;
   min-width: auto;
   text-align: center;
   cursor: pointer;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
   text-decoration: none;
 }
 
@@ -241,7 +241,7 @@ li {
 
 .main__video {
   margin: 2.8em;
-  max-width: 60em;
+  width: 95%;
 }
 
 .main__video--inner {
@@ -250,8 +250,12 @@ li {
   display: flex;
 }
 
+.main__video--inner img {
+  border-radius: 5px;
+}
+
 .main iframe {
-  margin: 3em 1.6em;
+  margin: 2em 1.6em 0 2em;
 }
 
 .pagination {
@@ -293,6 +297,71 @@ li {
   background-color: #242424;
 }
 
+.statistics {
+  font-size: 17px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #909090;
+  border-bottom: 1px solid #acabab;
+  padding: 10px 0;
+}
+
+.rate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.rate .share {
+  margin: 0 10px;
+}
+
+.rate-detail {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0px 10px;
+}
+
+.rate-detail svg {
+  margin: 0 5px 0 10px;
+}
+
+.details {
+  max-width: 853px;
+  margin: 0px 30px;
+}
+
+.title {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+pre {
+  margin: 20px 0;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
 .error {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -320,5 +389,14 @@ li {
 
 .countries {
   margin: 30px 0 0 25px;
+}
+
+.modal {
+  position: fixed;
+  font-size: 100px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
 }
 /*# sourceMappingURL=style.css.map */

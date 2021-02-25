@@ -4,16 +4,16 @@ import { BrowserRouter as Router, Redirect } from "react-router-dom";
 
 function App() {
   const [fireRedirect, setFireRedirect] = useState(false);
-  const [searchValue, setSearchValue] = useState("most popular videos");
+  const [searchValue, setSearchValue] = useState("Tom Waits");
   const [searchData, setSearchData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [trendingData, setTrendingData] = useState([]);
   const [nextPage, setNextPage] = useState("");
   const [prevPage, setPrevPage] = useState("");
   const [pageToken, setPageToken] = useState("");
-  const [country, setCountry] = useState("US");
+  const [country, setCountry] = useState("TR");
   const [idData, setIdData] = useState([]);
-
+  const [isModalOpened, setIsModalOpened] = useState(false);
   const searchValueWithPlus = searchValue.split(" ").join("+");
   const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
   const searchAPI = `https://www.googleapis.com/youtube/v3/search?pageToken=${pageToken}&part=snippet&maxResults=50&q=${searchValueWithPlus}&type=video&key=${API_KEY}`;
@@ -94,7 +94,11 @@ function App() {
 
   //  !! OPEN INFO MODAL!!
   const openInfoModal = () => {
-    alert("hey");
+    if (!isModalOpened) {
+      setIsModalOpened(true);
+    } else {
+      setIsModalOpened(false);
+    }
   };
 
   //  !! PAGNITATION
@@ -110,12 +114,14 @@ function App() {
     document.documentElement.scrollTop = 0;
   };
 
+  // !! CHOOSE COUNTRY FOR TRENDING
   const selectCountry = (select) => {
     setCountry(select);
   };
 
   return (
     <Routers
+      isModalOpened={isModalOpened}
       trendingData={trendingData}
       userInfo={() => openInfoModal()}
       finalClear={() => clear()}

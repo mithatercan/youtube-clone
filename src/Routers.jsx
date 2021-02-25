@@ -23,6 +23,7 @@ function Routers({
   prevPageCall,
   isDisabled,
   selectCountry,
+  isModalOpened,
 }) {
   return (
     <Router>
@@ -32,6 +33,7 @@ function Routers({
             setVideos={(e, searchValue) => finalSearch(e, searchValue)}
             clearData={() => finalClear()}
             openInfo={() => userInfo()}
+            isModalOpened={isModalOpened}
           >
             <Route exact path="/">
               <Home

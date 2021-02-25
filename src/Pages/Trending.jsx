@@ -6,7 +6,7 @@ import StyledLinkVideo from "../Components/Buttons/StyledLinkVideo";
 import uuid from "react-uuid";
 
 function Trending({ trendingData, selectCountry, getVideo }) {
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("TR");
 
   useEffect(() => {
     console.log(country);

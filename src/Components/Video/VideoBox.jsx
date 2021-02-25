@@ -5,6 +5,7 @@ function VideoBox({ item }) {
     <div className="main__video" to={"/videos/search?q="}>
       <div className="main__video--inner">
         <img src={item.snippet.thumbnails.medium.url} alt="" />
+
         <div className="video-component__main">
           <h3>{item.snippet.title}</h3>
           <span>

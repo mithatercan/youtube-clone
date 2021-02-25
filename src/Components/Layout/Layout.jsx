@@ -12,15 +12,12 @@ function Layout({
   setVideos,
   clearData,
   openInfo,
-  nextPageCall,
-  prevPageCall,
-  checkDisable,
+  isModalOpened,
+  setCategoryId,
 }) {
   const widthOfScreen = window.innerWidth;
   const [isOpened, setIsOpened] = useState(true);
   const [data, setData] = useState([]);
-  const [search, setSearch] = useState("");
-  const [getCategoryId, setCategoryId] = useState(0);
 
   // ! FOR SIDEBAR !
   const toggleIt = () => {
@@ -75,6 +72,11 @@ function Layout({
           <div className="main__videos">{children}</div>
         </Main>
       </div>
+      {isModalOpened ? (
+        <div style={{ color: "red" }} className="modal">
+          MODAL HERE
+        </div>
+      ) : null}
     </div>
   );
 }

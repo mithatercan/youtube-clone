@@ -1,3 +1,11 @@
 .countries {
   margin: 30px 0 0 25px;
 }
+
+.modal {
+  position: fixed;
+  font-size: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+}

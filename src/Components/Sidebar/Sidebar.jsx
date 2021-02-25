@@ -20,7 +20,7 @@ function Sidebar({ statu }) {
           </li>
         </StyledLink>
 
-        <StyledLink to="/history">
+        <StyledLink>
           <li>
             <FaHistory className="sidebar__icon" size={22} />
             <span>History</span>
