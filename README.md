@@ -16,29 +16,23 @@ git clone https://github.com/mithatercann/youtube-clone.git
 You should go to Google Console and get a YouTube API key. And then create a.env file in the folder and set the variable for API_KEY.
 
 ```
-
 cd youtube-clone
 
 touch .env
-
 ```
 
 ```
-
 API_KEY = Place your API key here.
-
 ```
 
 Then go to the folder, install the requirements, and start the application with npm.
 
 ```
-
 cd youtube-clone
 
 npm install
 
 npm start
-
 ```
 
 ### Completed! 🥳
