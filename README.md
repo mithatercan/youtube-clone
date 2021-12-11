@@ -4,12 +4,12 @@
 
 This is my first project using ReactJS. I didn't use the state management library or the useContext hook to manage the state. I'm done with prop drilling because I was really new to ReactJS. Please follow the guide below to install the app.
 
-## Begin now
+## Get started
 
 Start by cloning this [repository](https://github.com/mithatercann/youtube-clone).
 
 ```
-Clone the repository https://github.com/mithatercann/youtube-clone.git
+git clone https://github.com/mithatercann/youtube-clone.git
 ```
 # Installation
 
@@ -17,15 +17,15 @@ You should go to Google Console and get a YouTube API key. And then create a.env
 
 ```
 
-CD youtube-clone
+cd youtube-clone
 
-touch.env
-
-```
+touch .env
 
 ```
 
-API_KEY =?Place your API key here.
+```
+
+API_KEY = Place your API key here.
 
 ```
 
@@ -33,7 +33,7 @@ Then go to the folder, install the requirements, and start the application with 
 
 ```
 
-CD youtube-clone
+cd youtube-clone
 
 npm install
 
@@ -43,7 +43,7 @@ npm start
 
 ### Completed! 🥳
 
-The app is ready to go. Check the local host.
+The app is ready to go. Check the localhost.
 
 ## LICENCE
 
